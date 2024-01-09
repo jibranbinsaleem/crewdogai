@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
-interface LoginProps {
-  history: any;
-}
-
 export function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +30,62 @@ export function Login() {
     }
   };
 
+  const styles: { [key: string]: React.CSSProperties } = {
+    loginContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
+    },
+    formContainer: {
+      maxWidth: '400px',
+      width: '100%',
+      padding: '20px',
+      backgroundColor: '#fff',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+      borderRadius: '8px',
+      textAlign: 'center',
+    },
+    h2: {
+      color: '#333',
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    inputContainer: {
+      position: 'relative',
+      marginBottom: '20px',
+    },
+    input: {
+      width: '100%',
+      padding: '10px',
+      marginTop: '5px',
+      border: '1px solid #ddd',
+      borderRadius: '4px',
+    },
+    icon: {
+      position: 'absolute',
+      top: '50%',
+      right: '10px',
+      transform: 'translateY(-50%)',
+      color: '#aaa',
+    },
+    button: {
+      backgroundColor: '#3498db',
+      color: '#fff',
+      padding: '10px',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s',
+    },
+    buttonHover: {
+      backgroundColor: '#2980b9',
+    },
+  };
+
   return (
     <>
       <Helmet>
@@ -41,23 +93,33 @@ export function Login() {
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
 
-      <div>
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <button type="submit">Login</button>
-        </form>
+      <div style={styles.loginContainer}>
+        <div style={styles.formContainer}>
+          <h2 style={styles.h2}>Login</h2>
+          <form style={styles.form} onSubmit={handleLogin}>
+            <div style={styles.inputContainer}>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                style={styles.input}
+              />
+              <i className="fas fa-user" style={styles.icon}></i>
+            </div>
+            <div style={styles.inputContainer}>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={styles.input}
+              />
+              <i className="fas fa-lock" style={styles.icon}></i>
+            </div>
+            <button type="submit" style={styles.button}>Login</button>
+          </form>
+        </div>
       </div>
     </>
   );
